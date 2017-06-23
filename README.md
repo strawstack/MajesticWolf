@@ -1,4 +1,4 @@
-# Pure Functional Games
+# A Pure Functional Game
 
 This project involves designing and implementing a variation on a classically inspired game using pure functions and combinators. Pure functions will be used to allow players to alter the state of the game in some way in order achieve a specified objective, and combinators will be studied as their properties will be useful to extend the depth and strategy of the game.
 
