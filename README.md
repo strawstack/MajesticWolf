@@ -10,4 +10,4 @@ An example of a game based on pure functions may operate roughly as follows. Eac
 
 This project is part of the 2017 Wolfram Summer School.
 
-![](./img.png)
+![](./img1.png)
