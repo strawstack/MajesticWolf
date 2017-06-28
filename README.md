@@ -7,3 +7,5 @@ Classical card games and board games often involve a combination of random eleme
 An example of a game based on pure functions may operate roughly as follows. Each player is assigned a 5 by 5 matrix of integers as their game board. In alternating rounds, players pick pure functions from a virtual deck in order to alter the state of their matrix. A player's goal is to create as many 10's as possible inside their matrix. When their are no more pure functions left in the deck the player with the most 10's in their matrix wins.
 
 This project is part of the 2017 Wolfram Summer School.
+
+![](./img.png)
