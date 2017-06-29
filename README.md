@@ -1,6 +1,6 @@
 # Pure Functional Games
 
-![](./img2.png)
+![](./files/img2.png)
 
 This project involves designing and implementing a variation on a classically inspired game using pure functions and combinators. Pure functions will be used to allow players to alter the state of the game in order achieve a specified objective, and combinators will be studied as their properties may be useful to extend the depth and strategy of the game.
 
@@ -10,4 +10,4 @@ An example of a game based on pure functions may operate roughly as follows. Eac
 
 This project is part of the 2017 Wolfram Summer School.
 
-![](./img1.png)
+![](./files/img1.png)
