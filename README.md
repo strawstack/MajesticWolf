@@ -22,6 +22,8 @@ Each player has a five by five grid of numbers mod 10. Taking turns, players cho
 
 The user can adjust the rule number, which they want to surf on, and they can adjust the actions that their surfer takes based on the three cells infrot of them. The user then surfs over the cellular automata attempting to collect blue squares. The players score is the number of blue squares they collect.
 
+![](./files/surfer.png)
+
 ### BomberMan
 
 Players use keyboard keys to navigate around a grid attempting to place bombs in each others path. The walls of the grid and the players can be destroyed by explosives. The game ends when one a player gets hit by the path of an explosive.    
