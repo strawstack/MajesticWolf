@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     57362,       1482]
-NotebookOptionsPosition[     54434,       1407]
-NotebookOutlinePosition[     54789,       1423]
-CellTagsIndexPosition[     54746,       1420]
+NotebookDataLength[     56807,       1467]
+NotebookOptionsPosition[     54082,       1396]
+NotebookOutlinePosition[     54437,       1412]
+CellTagsIndexPosition[     54394,       1409]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1391,18 +1391,7 @@ and \[OpenCurlyDoubleQuote]z\[CloseCurlyDoubleQuote]\
    3.70792545226782*^9, 3.707925606012731*^9}, 3.7079267872892923`*^9, {
    3.707928775123906*^9, 3.707928809066079*^9}, {3.707932488611575*^9, 
    3.707932488909986*^9}},ExpressionUUID->"bebd4ce0-6c95-40e9-841f-\
-2ba757dbc485"],
-
-Cell[BoxData["GraphEmbedding"], "Input",
- CellChangeTimes->{{3.707921911041357*^9, 3.707921913070951*^9}, {
-  3.7079309078578444`*^9, 
-  3.707930913395935*^9}},ExpressionUUID->"42d4a933-3c7a-47ea-b471-\
-b4cb4ba1d5d0"],
-
-Cell["Kevin Daily", "Text",
- CellChangeTimes->{
-  3.707930918877865*^9},ExpressionUUID->"50c02a49-3c98-4e5a-baaa-\
-4648fd20f9f0"]
+2ba757dbc485"]
 }, Open  ]]
 },
 WindowSize->{808, 751},
@@ -1478,11 +1467,7 @@ Cell[CellGroupData[{
 Cell[53146, 1369, 151, 3, 64, "Section", "ExpressionUUID" -> \
 "04e52865-08e6-4be7-901e-97b5b8e0dd24"],
 Cell[53300, 1374, 766, 19, 201, "Text", "ExpressionUUID" -> \
-"bebd4ce0-6c95-40e9-841f-2ba757dbc485"],
-Cell[54069, 1395, 217, 4, 32, "Input", "ExpressionUUID" -> \
-"42d4a933-3c7a-47ea-b471-b4cb4ba1d5d0"],
-Cell[54289, 1401, 129, 3, 30, "Text", "ExpressionUUID" -> \
-"50c02a49-3c98-4e5a-baaa-4648fd20f9f0"]
+"bebd4ce0-6c95-40e9-841f-2ba757dbc485"]
 }, Open  ]]
 }
 ]

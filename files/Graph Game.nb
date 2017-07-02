@@ -1,0 +1,874 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     32624,        866]
+NotebookOptionsPosition[     28355,        753]
+NotebookOutlinePosition[     28710,        769]
+CellTagsIndexPosition[     28667,        766]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Kevin Daily", "Text",
+ CellChangeTimes->{
+  3.707930918877865*^9},ExpressionUUID->"50c02a49-3c98-4e5a-baaa-\
+4648fd20f9f0"],
+
+Cell["\<\
+There\[CloseCurlyQuote]s a grid of functions that players pick from which are \
+then used. A player must click a vertex then click a function to extend the \
+graph the goal is to make the largest graph \
+\>", "Text",
+ CellChangeTimes->{{3.7079968704574337`*^9, 
+  3.707996928345509*^9}},ExpressionUUID->"cf21261b-dbfb-4775-bcd0-\
+8bf0f35139ce"],
+
+Cell[CellGroupData[{
+
+Cell["Helper Functions", "Section",
+ CellChangeTimes->{{3.707999471575348*^9, 
+  3.707999474488302*^9}},ExpressionUUID->"dda8489d-cc6b-45a9-a153-\
+9b4839721fa7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"construct", " ", "a", " ", "vertex", " ", "with", " ", "id"}], 
+    ",", " ", "label", ",", " ", 
+    RowBox[{"and", " ", "click", " ", "action"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"vert", "[", 
+    RowBox[{"id_", ",", "label_", ",", "action_"}], "]"}], ":=", 
+   RowBox[{"Button", "[", 
+    RowBox[{
+     RowBox[{"Labeled", "[", 
+      RowBox[{"id", ",", "label"}], "]"}], ",", 
+     RowBox[{"action", "[", "0", "]"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7079990316755867`*^9, 3.707999077266045*^9}, {
+  3.707999267852495*^9, 3.707999284549367*^9}, {3.707999326211708*^9, 
+  3.707999349949583*^9}, {3.707999399440857*^9, 3.707999414924397*^9}, {
+  3.707999685652939*^9, 3.7079996858377953`*^9}, {3.708000609227057*^9, 
+  3.70800060951935*^9}},ExpressionUUID->"c9158a3a-c3c6-476d-a33b-\
+4fff1e19d73a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "create", " ", "grid", " ", "cell", " ", "with", " ", "selectable", " ", 
+    "functions"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"cell", "[", 
+    RowBox[{"fnHead_", ",", "clickAction_"}], "]"}], ":=", 
+   RowBox[{"ClickPane", "[", 
+    RowBox[{
+     RowBox[{"Mouseover", "[", 
+      RowBox[{"fnHead", ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{"fnHead", ",", 
+         RowBox[{"FontColor", "\[Rule]", "Orange"}]}], "]"}]}], "]"}], ",", 
+     "clickAction"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.707997707290663*^9, 3.7079977557126713`*^9}, {
+  3.707999434390336*^9, 
+  3.7079994516291122`*^9}},ExpressionUUID->"1c5c51cd-10eb-4a81-b01e-\
+de34f6af4301"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"arg", "[", "arg_", "]"}], ":=", 
+  RowBox[{"(", 
+   RowBox[{"argumentSelected", "=", "arg"}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.707999968617156*^9, 3.707999998853387*^9}, {
+  3.708000145781557*^9, 
+  3.708000146264617*^9}},ExpressionUUID->"ff72b601-5d67-4704-b1d7-\
+3a150c47fd28"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"funct", "[", "fn_", "]"}], ":=", 
+  RowBox[{"(", 
+   RowBox[{"functionSelected", "=", "fn"}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.708000161774825*^9, 
+  3.708000176512904*^9}},ExpressionUUID->"45dba7c6-128f-4db1-924e-\
+7be4d8ee3f56"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"result", ",", " ", "boolean"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"eval", "[", 
+    RowBox[{"fn_", ",", "arg_", ",", "expected_"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"fn", "@", "arg"}], ",", 
+     RowBox[{"TrueQ", "[", 
+      RowBox[{
+       RowBox[{"Head", "[", "arg", "]"}], "\[Equal]", "expected"}], "]"}]}], 
+    "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.7080010542953663`*^9, 3.7080010716134243`*^9}, {
+  3.7080019994015627`*^9, 3.70800200279139*^9}, {3.708002199760043*^9, 
+  3.708002237893866*^9}},ExpressionUUID->"bd40498f-9fbf-4df7-b3b4-\
+d5efde5e9593"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Init", "Section",
+ CellChangeTimes->{{3.708000011153244*^9, 
+  3.7080000151333113`*^9}},ExpressionUUID->"b60996ed-6d34-4f4e-bc8f-\
+8a938705b92d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"argumentSelected", "=", "Null"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functionSelected", "=", "Null"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7080000158515778`*^9, 3.708000034268276*^9}, {
+  3.708000068857575*^9, 
+  3.708000077868614*^9}},ExpressionUUID->"1a52dee3-5a37-4d67-9d56-\
+2258fb6b3af8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Display", "Section",
+ CellChangeTimes->{{3.707999484072322*^9, 
+  3.7079994851863613`*^9}},ExpressionUUID->"7084e5f2-6ae2-4e60-a32b-\
+bb5328ba4600"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graph", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"vert", "[", 
+      RowBox[{"1", ",", "\"\<10.5\>\"", ",", 
+       RowBox[{"x", "\[Function]", 
+        RowBox[{"arg", "[", "10.5", "]"}]}]}], "]"}], ",", " ", 
+     "\[IndentingNewLine]", 
+     RowBox[{"vert", "[", 
+      RowBox[{"2", ",", "\"\<{1,2,3}\>\"", ",", 
+       RowBox[{"x", "\[Function]", 
+        RowBox[{"arg", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2", ",", "3"}], "}"}], "]"}]}]}], "]"}], ",", 
+     " ", "\[IndentingNewLine]", 
+     RowBox[{"vert", "[", 
+      RowBox[{"3", ",", "\"\<Rectangle[]\>\"", ",", 
+       RowBox[{"x", "\[Function]", 
+        RowBox[{"arg", "[", 
+         RowBox[{"Rectangle", "[", "]"}], "]"}]}]}], "]"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "\[UndirectedEdge]", "2"}], ",", 
+     RowBox[{"2", "\[UndirectedEdge]", "3"}], ",", 
+     RowBox[{"3", "\[UndirectedEdge]", "1"}]}], "}"}], ",", " ", 
+   RowBox[{"VertexSize", "\[Rule]", "Small"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.707997258122768*^9, 3.7079975353162107`*^9}, {
+  3.707997581015452*^9, 3.7079975896951*^9}, {3.707998601887381*^9, 
+  3.70799860639163*^9}, {3.7079988005233393`*^9, 3.70799880669031*^9}, {
+  3.70799884161121*^9, 3.7079989586912003`*^9}, {3.707999087222225*^9, 
+  3.7079991180843077`*^9}, {3.707999156366171*^9, 3.707999320124354*^9}, {
+  3.7079993580683193`*^9, 3.707999389565929*^9}, {3.707999421823053*^9, 
+  3.7079994221550417`*^9}, {3.707999688387681*^9, 3.7079996885357637`*^9}, {
+  3.707999898195838*^9, 3.707999898751746*^9}, {3.707999946652795*^9, 
+  3.707999965806819*^9}, {3.708000152597835*^9, 3.7080001531704903`*^9}, {
+  3.708000301371874*^9, 3.708000304099737*^9}, {3.708000397161275*^9, 
+  3.708000404453618*^9}, {3.708000438693892*^9, 3.708000468924398*^9}, {
+  3.708000502255406*^9, 
+  3.708000642701682*^9}},ExpressionUUID->"33ded94a-88b4-45d2-96e6-\
+1975ac9785b8"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3}, {Null, {{1, 2}, {2, 3}, {3, 1}}}, {
+      Properties -> {1 -> {Button -> HoldComplete[
+             Function[$CellContext`x, 
+              $CellContext`arg[10.5]][0]]}, 2 -> {Button -> HoldComplete[
+             Function[$CellContext`x, 
+              $CellContext`arg[{1, 2, 3}]][0]]}, 
+         3 -> {Button -> HoldComplete[
+             Function[$CellContext`x, 
+              $CellContext`arg[
+               Rectangle[]]][0]]}}, 
+       VertexLabels -> {3 -> "Rectangle[]", 2 -> "{1,2,3}", 1 -> "10.5"}, 
+       VertexSize -> {Small}}]]}, 
+    TagBox[GraphicsGroupBox[{{
+        {Hue[0.6, 0.7, 0.5], Opacity[0.7], {
+          {Arrowheads[0.], 
+           ArrowBox[{{-0.8660254037844384, -0.4999999999999994}, {
+            0.8660254037844389, -0.5000000000000012}}, 
+            0.08660254037844384]}}, {
+          {Arrowheads[0.], 
+           ArrowBox[{{-0.8660254037844384, -0.4999999999999994}, {
+            1.8369701987210297`*^-16, 1.}}, 0.08660254037844384]}}, {
+          {Arrowheads[0.], 
+           ArrowBox[{{0.8660254037844389, -0.5000000000000012}, {
+            1.8369701987210297`*^-16, 1.}}, 0.08660254037844384]}}}}, {
+        {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], {
+          
+          TagBox[DiskBox[{-0.8660254037844384, -0.4999999999999994}, 
+            0.08660254037844384],
+           EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+               $CellContext`arg[10.5]][0], Method -> "Preemptive", 
+             PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+          InsetBox["\<\"10.5\"\>", 
+           Offset[{2, 2}, {-0.7794228634059945, -0.41339745962155555}], 
+           ImageScaled[{0, 0}],
+           BaseStyle->"Graphics"]}, {
+          
+          TagBox[DiskBox[{0.8660254037844389, -0.5000000000000012}, 
+            0.08660254037844384],
+           EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+               $CellContext`arg[{1, 2, 3}]][0], Method -> "Preemptive", 
+             PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+          InsetBox["\<\"{1,2,3}\"\>", 
+           Offset[{2, 2}, {0.9526279441628828, -0.4133974596215574}], 
+           ImageScaled[{0, 0}],
+           BaseStyle->"Graphics"]}, {
+          TagBox[DiskBox[{1.8369701987210297*^-16, 1.}, 0.08660254037844384],
+           EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+               $CellContext`arg[
+                Rectangle[]]][0], Method -> "Preemptive", PassEventsDown -> 
+             Automatic, PassEventsUp -> True}]], 
+          InsetBox["\<\"Rectangle[]\"\>", 
+           Offset[{2, 2}, {0.08660254037844402, 1.0866025403784438}], 
+           ImageScaled[{0, 0}],
+           BaseStyle->"Graphics"]}}}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None]], "Output",
+ CellChangeTimes->{
+  3.707998914382668*^9, 3.707998959309922*^9, {3.707999106184291*^9, 
+   3.707999128009473*^9}, {3.707999180369213*^9, 3.707999210930777*^9}, {
+   3.7079992417687387`*^9, 3.707999275542295*^9}, {3.707999333629723*^9, 
+   3.707999390118153*^9}, {3.7079996911813593`*^9, 3.707999696713505*^9}, 
+   3.708000062482978*^9, 3.708000154036892*^9, {3.70800029660653*^9, 
+   3.708000331703614*^9}, {3.708000460606532*^9, 3.708000469429721*^9}, {
+   3.7080005032897263`*^9, 3.708000539043503*^9}, 3.7080005830542297`*^9, {
+   3.708000619847723*^9, 3.7080006430807133`*^9}, 3.708000898107666*^9, 
+   3.708002245612137*^9},ExpressionUUID->"980c25c7-b7b8-4138-b4ff-\
+84d14504b1f5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"cell", "[", 
+        RowBox[{"Sin", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Sin", "]"}]}], ",", "Real"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"cell", "[", 
+        RowBox[{"Cos", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Cos", "]"}]}], ",", "Real"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"cell", "[", 
+        RowBox[{"Tan", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Tan", "]"}]}], ",", " ", "Real"}], "]"}]}], 
+      "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"cell", "[", 
+        RowBox[{"Map", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Map", "]"}]}], ",", " ", "List"}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"cell", "[", 
+        RowBox[{"Array", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Array", "]"}]}], ",", " ", "List"}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"cell", "[", 
+        RowBox[{"Range", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Range", "]"}]}], ",", " ", "List"}], "]"}]}],
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"cell", "[", 
+        RowBox[{"Fold", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Fold", "]"}]}], ",", "Number"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"cell", "[", 
+        RowBox[{"Nest", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Nest", "]"}]}]}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"cell", "[", 
+        RowBox[{"Select", ",", 
+         RowBox[{"x", "\[Function]", 
+          RowBox[{"funct", "[", "Select", "]"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "}"}], ",", " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.707997594888156*^9, 3.707997696006576*^9}, {
+  3.707997766802788*^9, 3.707997889187976*^9}, {3.708000243199502*^9, 
+  3.7080002457473288`*^9}, {3.708000279332546*^9, 3.70800028376968*^9}, {
+  3.7080003179518557`*^9, 3.708000320317039*^9}, {3.708000671177787*^9, 
+  3.7080007117501497`*^9}, {3.7080008524157877`*^9, 3.70800088872894*^9}, {
+  3.70800210154031*^9, 3.708002106241214*^9}, {3.7080022566586037`*^9, 
+  3.708002271228815*^9}, {3.708002313548503*^9, 
+  3.7080023435998993`*^9}},ExpressionUUID->"ffa6d264-9e10-4b64-bb7e-\
+a0feca3c3c43"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TagBox[
+      PaneSelectorBox[{False->"Sin", True->
+       StyleBox["Sin",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Sin]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+     TagBox[
+      PaneSelectorBox[{False->"Cos", True->
+       StyleBox["Cos",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Cos]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+     TagBox[
+      PaneSelectorBox[{False->"Tan", True->
+       StyleBox["Tan",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Tan]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]]},
+    {
+     TagBox[
+      PaneSelectorBox[{False->"Map", True->
+       StyleBox["Map",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Map]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+     TagBox[
+      PaneSelectorBox[{False->"Array", True->
+       StyleBox["Array",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Array]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+     TagBox[
+      PaneSelectorBox[{False->"Range", True->
+       StyleBox["Range",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Range]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]]},
+    {
+     TagBox[
+      PaneSelectorBox[{False->"Fold", True->
+       StyleBox["Fold",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Fold]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+     TagBox[
+      PaneSelectorBox[{False->"Nest", True->
+       StyleBox["Nest",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Nest]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+     TagBox[
+      PaneSelectorBox[{False->"Select", True->
+       StyleBox["Select",
+        StripOnInput->False,
+        FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      EventHandlerTag[{"MouseClicked" :> Function[$CellContext`x, 
+          $CellContext`funct[Select]][
+          MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+        PassEventsDown -> Automatic, PassEventsUp -> True}]]}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.707997612895602*^9, 3.707997696592712*^9}, 
+   3.707997777602112*^9, 3.707997889713479*^9, {3.708000246728115*^9, 
+   3.708000266608261*^9}, {3.708000314963645*^9, 3.7080003254510717`*^9}, {
+   3.708000890052353*^9, 
+   3.708000898188089*^9}},ExpressionUUID->"9fcc8da4-f691-45be-8777-\
+6163fc397c80"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Selected", "Section",
+ CellChangeTimes->{{3.707999794679112*^9, 
+  3.707999795665226*^9}},ExpressionUUID->"397e10fc-bab4-4a50-8b88-\
+97394ee984e7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", "argumentSelected", "]"}]], "Input",
+ CellChangeTimes->{{3.707999798460188*^9, 3.707999836907984*^9}, {
+  3.707999986660781*^9, 
+  3.707999987619995*^9}},ExpressionUUID->"7aaad687-2d76-4176-9e25-\
+41dd25ca5171"],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[$CellContext`argumentSelected, StandardForm],
+  ImageSizeCache->{31., {1., 10.}}]], "Output",
+ CellChangeTimes->{{3.707999811366048*^9, 3.707999837535118*^9}, 
+   3.7080001162948*^9, 
+   3.708000262627359*^9},ExpressionUUID->"473ffc73-6fe4-4630-bff0-\
+e676c218232f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", "functionSelected", "]"}]], "Input",
+ CellChangeTimes->{{3.7079998129375343`*^9, 
+  3.707999830064827*^9}},ExpressionUUID->"31bfe41a-0c85-4d10-a247-\
+0e9ba3f48bbc"],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[$CellContext`functionSelected, StandardForm],
+  ImageSizeCache->{31., {1., 10.}}]], "Output",
+ CellChangeTimes->{
+  3.707999831613153*^9, 3.708000117459165*^9, {3.708000252777864*^9, 
+   3.708000260979329*^9}},ExpressionUUID->"5791629f-c6e6-4668-bcbf-\
+01ff61b02163"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Submit", "Section",
+ CellChangeTimes->{{3.70800091791852*^9, 
+  3.7080009190397873`*^9}},ExpressionUUID->"df45a572-2537-4a82-b324-\
+cd4e1c03a954"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Button", "[", 
+  RowBox[{"\"\<Evaluate\>\"", ",", 
+   RowBox[{"eval", "[", 
+    RowBox[{
+     RowBox[{"First", "[", "functionSelected", "]"}], ",", "argumentSelected",
+      ",", 
+     RowBox[{"functionSelected", "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7080009207965193`*^9, 3.708000967761918*^9}, {
+  3.708002170504381*^9, 
+  3.708002187812887*^9}},ExpressionUUID->"c90d24d7-7df4-4f06-b7e8-\
+1c50e969995b"],
+
+Cell[BoxData[
+ ButtonBox["\<\"Evaluate\"\>",
+  Appearance->Automatic,
+  ButtonFunction:>$CellContext`eval[
+    First[$CellContext`functionSelected], $CellContext`argumentSelected, 
+    Part[$CellContext`functionSelected, 2]],
+  Evaluator->Automatic,
+  Method->"Preemptive"]], "Output",
+ CellChangeTimes->{3.708000934466868*^9, 3.7080009978520803`*^9, 
+  3.7080021886894913`*^9},ExpressionUUID->"28ed00be-ecef-4eee-9df6-\
+b6c1979421d1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TrueQ", "[", 
+  RowBox[{
+   RowBox[{"Head", "[", "5.5", "]"}], "\[Equal]", "Integer"}], "]"}]], "Input",\
+
+ CellChangeTimes->{{3.708002110829227*^9, 
+  3.708002147656836*^9}},ExpressionUUID->"2c48b97c-bde6-48d4-9524-\
+38589460f949"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.7080021141046457`*^9, 
+  3.7080021482504663`*^9}},ExpressionUUID->"c14c1211-18cf-4f9c-868e-\
+35cd5236895c"]
+}, Open  ]],
+
+Cell[BoxData["Range"], "Input",
+ CellChangeTimes->{{3.7080022901583643`*^9, 
+  3.708002290928746*^9}},ExpressionUUID->"98c57129-c117-4f26-be4a-\
+75c717a0b8ce"],
+
+Cell["\<\
+The problem is that functions can often take any argument and will evaluate \
+to a symbolic expression instead of throwing an error. I tried to indicate \
+what the output should be but functions like nest can be a number or list. \
+Thus, the problem of executing an arbitrary function with an argument is \
+equivalent to the presentation we had on same checking. The solution is to \
+simplify the game until players are just dealing with integers and list with \
+a small set of function and its not fun\
+\>", "Text",
+ CellChangeTimes->{{3.708002413341835*^9, 3.708002507405374*^9}, {
+  3.7080026140111217`*^9, 
+  3.708002694334324*^9}},ExpressionUUID->"45c23c92-66ee-4a17-ab9a-\
+53732a99bb40"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "3.5", ",", "\"\<open\>\"", ",", "\"\<open\>\"", ",", "\"\<open\>\"", 
+       ",", "\"\<open\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "3", ",", "\"\<open\>\"", ",", "\"\<open\>\"", ",", "\"\<open\>\"", 
+       ",", "\"\<open\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "1", ",", "\"\<open\>\"", ",", "\"\<open\>\"", ",", "\"\<open\>\"", 
+       ",", "\"\<open\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "9", ",", "\"\<open\>\"", ",", "\"\<open\>\"", ",", "\"\<open\>\"", 
+       ",", "\"\<open\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "11", ",", "\"\<open\>\"", ",", "\"\<open\>\"", ",", "\"\<open\>\"", 
+       ",", "\"\<open\>\""}], "}"}]}], "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", " ", 
+   RowBox[{"ItemSize", "\[Rule]", "5"}], ",", 
+   RowBox[{"Spacings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "3"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7080027186781673`*^9, 3.708002905678957*^9}, {
+  3.708002990055287*^9, 
+  3.708003073145381*^9}},ExpressionUUID->"6b41bdc9-bb3f-4d01-bf32-\
+0d2dbba02ef5"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"3.5`", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>"},
+    {"3", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>"},
+    {"1", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>"},
+    {"9", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>"},
+    {"11", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>", "\<\"open\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{5}}},
+   GridBoxSpacings->{"Columns" -> {{3}}, "Rows" -> {{3}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.7080027619525146`*^9, 3.708002778809276*^9}, {
+   3.7080028175806923`*^9, 3.708002872560635*^9}, 3.708002906750654*^9, {
+   3.7080030076164427`*^9, 
+   3.708003073853345*^9}},ExpressionUUID->"a856b0a1-b8cb-4afc-aeb5-\
+46536135b750"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"board", "=", 
+  RowBox[{"Array", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"RandomInteger", "[", "9", "]"}], "&"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", "5"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.708003326787202*^9, 3.7080033425814734`*^9}, {
+  3.7080034015025682`*^9, 
+  3.708003424374256*^9}},ExpressionUUID->"0047f3c0-c76a-4b6c-95f3-\
+a7f098a809a9"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"3", ",", "2", ",", "0", ",", "0", ",", "7"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "4", ",", "0", ",", "5"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "4", ",", "0", ",", "9", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "2", ",", "6", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "5", ",", "0", ",", "9", ",", "6"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.708003343101643*^9, {3.708003412449237*^9, 
+   3.7080034254365177`*^9}},ExpressionUUID->"42f45335-ff7e-4d34-b111-\
+e77668ca0c78"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", 
+  RowBox[{"Style", "[", 
+   RowBox[{
+    RowBox[{"Grid", "[", 
+     RowBox[{"board", ",", 
+      RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+      RowBox[{"ItemSize", "\[Rule]", "5"}], ",", 
+      RowBox[{"Spacings", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2"}], "}"}]}]}], "]"}], ",", 
+    RowBox[{"FontSize", "\[Rule]", "20"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7080033452675877`*^9, 3.708003383183052*^9}, {
+  3.708003428389803*^9, 
+  3.7080034541357393`*^9}},ExpressionUUID->"cee2e78f-548e-4aa0-8c7f-\
+373415bfceb3"],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   Style[
+    Grid[$CellContext`board, Frame -> All, ItemSize -> 5, Spacings -> {1, 2}],
+     FontSize -> 20], StandardForm],
+  ImageSizeCache->{642., {144.0908203125, 152.9091796875}}]], "Output",
+ CellChangeTimes->{{3.708003361617517*^9, 3.7080033835902157`*^9}, {
+  3.7080034155524187`*^9, 
+  3.708003454521647*^9}},ExpressionUUID->"a2594f2c-3a33-4935-a59c-\
+96ff5dddf372"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ClickPane", "[", 
+  RowBox[{
+   RowBox[{"Mouseover", "[", 
+    RowBox[{
+     RowBox[{"Style", "[", 
+      RowBox[{"Sin", ",", 
+       RowBox[{"FontSize", "\[Rule]", "30"}]}], "]"}], ",", 
+     RowBox[{"Style", "[", 
+      RowBox[{"Sin", ",", 
+       RowBox[{"Background", "\[Rule]", "Orange"}], ",", 
+       RowBox[{"FontSize", "\[Rule]", "30"}]}], "]"}]}], "]"}], ",", 
+   RowBox[{
+    RowBox[{"Echo", "[", "\"\<sam\>\"", "]"}], "&"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.708003473787921*^9, 3.7080034756541367`*^9}, {
+  3.7080035596556463`*^9, 3.7080035805771217`*^9}, {3.708003640179335*^9, 
+  3.708003706184114*^9}},ExpressionUUID->"f6aaa254-09a5-4b55-848a-\
+0dfb3d5a5b6a"],
+
+Cell[BoxData[
+ TagBox[
+  PaneSelectorBox[{False->
+   StyleBox["Sin",
+    StripOnInput->False,
+    FontSize->30], True->
+   StyleBox["Sin",
+    StripOnInput->False,
+    FontSize->30,
+    Background->RGBColor[1, 0.5, 0]]}, Dynamic[
+    CurrentValue["MouseOver"]],
+   FrameMargins->0,
+   ImageSize->Automatic],
+  EventHandlerTag[{"MouseClicked" :> (Echo["sam"]& )[
+      MousePosition["EventHandlerAutomatic"]], Method -> "Preemptive", 
+    PassEventsDown -> Automatic, PassEventsUp -> True}]]], "Output",
+ CellChangeTimes->{
+  3.708003567661269*^9, {3.708003646385015*^9, 
+   3.7080037071325197`*^9}},ExpressionUUID->"79ad9aa1-0c2b-47b8-a8f7-\
+b68d71e7767c"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 751},
+WindowMargins->{{12, Automatic}, {Automatic, 24}},
+FrontEndVersion->"11.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 16, \
+2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 129, 3, 30, "Text", "ExpressionUUID" -> \
+"50c02a49-3c98-4e5a-baaa-4648fd20f9f0"],
+Cell[690, 25, 354, 7, 49, "Text", "ExpressionUUID" -> \
+"cf21261b-dbfb-4775-bcd0-8bf0f35139ce"],
+Cell[CellGroupData[{
+Cell[1069, 36, 161, 3, 64, "Section", "ExpressionUUID" -> \
+"dda8489d-cc6b-45a9-a153-9b4839721fa7"],
+Cell[1233, 41, 912, 21, 54, "Input", "ExpressionUUID" -> \
+"c9158a3a-c3c6-476d-a33b-4fff1e19d73a"],
+Cell[2148, 64, 752, 20, 75, "Input", "ExpressionUUID" -> \
+"1c5c51cd-10eb-4a81-b01e-de34f6af4301"],
+Cell[2903, 86, 322, 8, 32, "Input", "ExpressionUUID" -> \
+"ff72b601-5d67-4704-b1d7-3a150c47fd28"],
+Cell[3228, 96, 273, 7, 32, "Input", "ExpressionUUID" -> \
+"45dba7c6-128f-4db1-924e-7be4d8ee3f56"],
+Cell[3504, 105, 672, 18, 54, "Input", "ExpressionUUID" -> \
+"bd40498f-9fbf-4df7-b3b4-d5efde5e9593"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4213, 128, 151, 3, 64, "Section", "ExpressionUUID" -> \
+"b60996ed-6d34-4f4e-bc8f-8a938705b92d"],
+Cell[4367, 133, 350, 8, 54, "Input", "ExpressionUUID" -> \
+"1a52dee3-5a37-4d67-9d56-2258fb6b3af8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4754, 146, 154, 3, 64, "Section", "ExpressionUUID" -> \
+"7084e5f2-6ae2-4e60-a32b-bb5328ba4600"],
+Cell[CellGroupData[{
+Cell[4933, 153, 2044, 42, 159, "Input", "ExpressionUUID" -> \
+"33ded94a-88b4-45d2-96e6-1975ac9785b8"],
+Cell[6980, 197, 3788, 74, 319, "Output", "ExpressionUUID" -> \
+"980c25c7-b7b8-4138-b4ff-84d14504b1f5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10805, 276, 2872, 66, 390, "Input", "ExpressionUUID" -> \
+"ffa6d264-9e10-4b64-bb7e-a0feca3c3c43"],
+Cell[13680, 344, 5014, 123, 89, "Output", "ExpressionUUID" -> \
+"9fcc8da4-f691-45be-8777-6163fc397c80"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18743, 473, 153, 3, 64, "Section", "ExpressionUUID" -> \
+"397e10fc-bab4-4a50-8b88-97394ee984e7"],
+Cell[CellGroupData[{
+Cell[18921, 480, 250, 5, 32, "Input", "ExpressionUUID" -> \
+"7aaad687-2d76-4176-9e25-41dd25ca5171"],
+Cell[19174, 487, 300, 6, 32, "Output", "ExpressionUUID" -> \
+"473ffc73-6fe4-4630-bff0-e676c218232f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19511, 498, 203, 4, 32, "Input", "ExpressionUUID" -> \
+"31bfe41a-0c85-4d10-a247-0e9ba3f48bbc"],
+Cell[19717, 504, 301, 6, 32, "Output", "ExpressionUUID" -> \
+"5791629f-c6e6-4668-bcbf-01ff61b02163"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20067, 516, 152, 3, 64, "Section", "ExpressionUUID" -> \
+"df45a572-2537-4a82-b324-cd4e1c03a954"],
+Cell[CellGroupData[{
+Cell[20244, 523, 485, 12, 54, "Input", "ExpressionUUID" -> \
+"c90d24d7-7df4-4f06-b7e8-1c50e969995b"],
+Cell[20732, 537, 435, 10, 43, "Output", "ExpressionUUID" -> \
+"28ed00be-ecef-4eee-9df6-b6c1979421d1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21204, 552, 256, 7, 32, "Input", "ExpressionUUID" -> \
+"2c48b97c-bde6-48d4-9524-38589460f949"],
+Cell[21463, 561, 162, 3, 32, "Output", "ExpressionUUID" -> \
+"c14c1211-18cf-4f9c-868e-35cd5236895c"]
+}, Open  ]],
+Cell[21640, 567, 159, 3, 32, "Input", "ExpressionUUID" -> \
+"98c57129-c117-4f26-be4a-75c717a0b8ce"],
+Cell[21802, 572, 703, 12, 106, "Text", "ExpressionUUID" -> \
+"45c23c92-66ee-4a17-ab9a-53732a99bb40"],
+Cell[CellGroupData[{
+Cell[22530, 588, 1373, 33, 159, "Input", "ExpressionUUID" -> \
+"6b41bdc9-bb3f-4d01-bf32-0d2dbba02ef5"],
+Cell[23906, 623, 878, 17, 281, "Output", "ExpressionUUID" -> \
+"a856b0a1-b8cb-4afc-aeb5-46536135b750"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24821, 645, 402, 11, 32, "Input", "ExpressionUUID" -> \
+"0047f3c0-c76a-4b6c-95f3-a7f098a809a9"],
+Cell[25226, 658, 655, 17, 32, "Output", "ExpressionUUID" -> \
+"42f45335-ff7e-4d34-b111-e77668ca0c78"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25918, 680, 593, 15, 32, "Input", "ExpressionUUID" -> \
+"cee2e78f-548e-4aa0-8c7f-373415bfceb3"],
+Cell[26514, 697, 411, 9, 314, "Output", "ExpressionUUID" -> \
+"a2594f2c-3a33-4935-a59c-96ff5dddf372"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26962, 711, 706, 17, 54, "Input", "ExpressionUUID" -> \
+"f6aaa254-09a5-4b55-848a-0dfb3d5a5b6a"],
+Cell[27671, 730, 656, 19, 56, "Output", "ExpressionUUID" -> \
+"79ad9aa1-0c2b-47b8-a8f7-b68d71e7767c"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
