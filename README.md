@@ -30,6 +30,6 @@ The user can adjust the rule number, which they want to surf on, and they can ad
 
 Players use keyboard keys to navigate around a grid attempting to place bombs in each others path. The walls of the grid and the players can be destroyed by explosives. The game ends when one a player gets hit by the path of an explosive.    
 
-![](./files/bomber.png)
+![](./files/bomber2.png)
 
 This project is part of the 2017 Wolfram Summer School.
