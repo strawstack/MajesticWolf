@@ -18,6 +18,8 @@ Three different types of games were created for this project. A functional game 
 
 Each player has a five by five grid of numbers mod 10. Taking turns, players choose a pure function from the five open functions on the table. This function is then applied to their matrix, and the resulting number of eights becomes their current score. When a player uses a function that function is removed and another is drawn from the deck. The game ends when their are no more functions. The winner is the player with the most eights.  
 
+![](./files/eights.png)
+
 ### CellularSurfer
 
 The user can adjust the rule number, which they want to surf on, and they can adjust the actions that their surfer takes based on the three cells infrot of them. The user then surfs over the cellular automata attempting to collect blue squares. The players score is the number of blue squares they collect.
