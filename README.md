@@ -8,7 +8,7 @@ This project involves designing and implementing games in Mathematica by examini
 
 Classical card games and board games often involve a combination of random elements and also a way for players to influence their performance by employing strategy. This project will mimic those characteristics and adjust them as necessary to create various games.
 
-An example of a game based on pure functions may operate roughly as follows. The game board is represented by a graph and begins with a single vertex. The vertex represents an argument to a function. Each player holds in their hand a list of functions, which they apply to the verticies of the graph to effect the game. When a function from a player's hand is applied to a vertex the result is placed on the board as a new vertex and an edge is drawn between the two verticies. The goal of the game is to be the last one to make a move such that the next player is unable to find a vertex containing a valid argument to any of the functions they hold in their hand. 
+An example of a game based on pure functions may operate roughly as follows. The game board is represented by a graph and begins with a single vertex. The vertex represents an argument to a function. Each player holds in their hand a list of functions, which they apply to the verticies of the graph to effect the game. When a function from a player's hand is applied to a vertex the result is placed on the board as a new vertex and an edge is drawn between the two verticies. The goal of the game is to be the last one to make a move such that the next player is unable to find a vertex containing a valid argument to any of the functions they hold in their hand.
 
 ## Games
 
@@ -18,7 +18,7 @@ Three different types of games were created for this project. A functional game 
 
 Each player has a five by five grid of numbers mod 10. Taking turns, players choose a pure function from the five open functions on the table. This function is then applied to their matrix, and the resulting number of eights becomes their current score. When a player uses a function that function is removed and another is drawn from the deck. The game ends when their are no more functions. The winner is the player with the most eights.  
 
-![](./files/eights3.png)
+![](./files/eights4.png)
 
 ### CellularSurfer
 
