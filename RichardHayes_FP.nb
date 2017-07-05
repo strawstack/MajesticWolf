@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    597809,      10252]
-NotebookOptionsPosition[    279991,       4807]
-NotebookOutlinePosition[    592937,      10141]
-CellTagsIndexPosition[    592633,      10129]
+NotebookDataLength[    597598,      10234]
+NotebookOptionsPosition[    280126,       4797]
+NotebookOutlinePosition[    593085,      10131]
+CellTagsIndexPosition[    592781,      10119]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -2228,7 +2228,7 @@ Cell["Abstract", "TemplateSection",
 Cell[TextData[{
  Cell["GOAL OF THE PROJECT:", "TemplateInlineHeader",ExpressionUUID->
   "d504b0e1-16cb-4ec1-a0e0-07de58e06dcb"],
- " Design and Implement a Functional Game"
+ " Design and Implement a Function-based Game"
 }], "TemplateText",
  CellChangeTimes->{{3.707836787772583*^9, 3.707836799763899*^9}, {
    3.708097797844706*^9, 3.708097798625815*^9}, {3.7080978567924232`*^9, 
@@ -2237,7 +2237,9 @@ Cell[TextData[{
    3.7081216197834473`*^9, 3.7081216228073187`*^9}, {3.708174739280595*^9, 
    3.708174744687518*^9}, {3.708174775114697*^9, 3.708174780561842*^9}, {
    3.708174882072277*^9, 3.70817488346124*^9}, {3.708199787472946*^9, 
-   3.708199848113062*^9}},ExpressionUUID->"854ae70b-14eb-423f-a4a3-\
+   3.708199848113062*^9}, 3.70825661653897*^9, {3.708256737325459*^9, 
+   3.708256739891478*^9}, {3.7082568627955008`*^9, 
+   3.708256863914661*^9}},ExpressionUUID->"854ae70b-14eb-423f-a4a3-\
 db7cbd22f54a"],
 
 Cell[TextData[{
@@ -2275,7 +2277,9 @@ Cell[TextData[{
 the maximum number of eights in their matrix while attempting to prevent the \
 other player from doing the same. Players choose between functions that \
 effect the entire board, and ones that modify only a single row/column. The \
-player with the most eights when the last function is used is the winner."
+player with the most eights when the last function is used is the winner. In \
+addition, I implemented two other games that allow players to explore \
+cellular automata in a visual and interactive manner.  "
 }], "TemplateText",
  CellChangeTimes->{{3.707836787772583*^9, 3.707836799763899*^9}, 
    3.708098600920475*^9, {3.708098759248849*^9, 3.7080987595687933`*^9}, {
@@ -2287,8 +2291,8 @@ player with the most eights when the last function is used is the winner."
    3.7082014992990932`*^9}, {3.708201572328288*^9, 3.708201593892611*^9}, {
    3.708201955674184*^9, 3.7082020475578537`*^9}, {3.708250392014943*^9, 
    3.708250407646332*^9}, {3.708251518402254*^9, 3.708251523063257*^9}, {
-   3.708252225187698*^9, 
-   3.708252241829114*^9}},ExpressionUUID->"fc37c58e-b01c-44f1-8892-\
+   3.708252225187698*^9, 3.708252241829114*^9}, {3.7082566346445637`*^9, 
+   3.708256727005376*^9}},ExpressionUUID->"fc37c58e-b01c-44f1-8892-\
 c017509d95ad"]
 }, Open  ]]
 }, Open  ]],
@@ -2461,7 +2465,7 @@ Cell[TextData[{
 ff32b660a5bf"],
 
 Cell["\<\
-My project was to make a function based game in order to allow new \
+My project was to make a function-based game in order to allow new \
 programmers to learn about Mathematica, and for experienced programmers to \
 find enough depth in order to stay entertained. I tried out several game \
 ideas which allowed players to write code directly and found that the scope \
@@ -2477,8 +2481,8 @@ complete the game objectives.\
    3.708201615448284*^9, 3.708201772762536*^9}, {3.708201819349186*^9, 
    3.7082018636222258`*^9}, {3.708202078399466*^9, 3.708202106529908*^9}, 
    3.708215526060781*^9, {3.708251334137027*^9, 3.708251341822736*^9}, {
-   3.708251375922344*^9, 
-   3.708251386732869*^9}},ExpressionUUID->"0746cc05-9ff2-4dea-862b-\
+   3.708251375922344*^9, 3.708251386732869*^9}, {3.708256734450734*^9, 
+   3.70825673462368*^9}},ExpressionUUID->"0746cc05-9ff2-4dea-862b-\
 2a8fdc8e7d89"],
 
 Cell[BoxData[
@@ -4619,17 +4623,20 @@ Cell["Main Results in Detail", "TemplateSubsection",
 33623658821c"],
 
 Cell["\<\
-The main results were the creation of two games. One which employed pure \
+The main results were the creation of three games. One which employed pure \
 functions directly in the game mechanic and was designed to allow players to \
 learn and practice the wolfram language. The second game was more of a visual \
 interaction where players use Turing machine like controls to govern the \
 movement of an avatar over an animated CA grid. The intension of the second \
-game is to allow players to experience the complex behaviour the arises with \
-CA and Turing machines.\
+game is to allow players to experience the complex behaviour that arises with \
+CA and Turing machines. Lastly, the third game was a clone of the classic \
+game \[OpenCurlyDoubleQuote]Bomber-man\[CloseCurlyDoubleQuote] which used CA \
+rule 30 to generate the game board. \
 \>", "Text",
  CellChangeTimes->{{3.7082523498098288`*^9, 3.708252505787229*^9}, {
-  3.708252545704547*^9, 
-  3.708252598424301*^9}},ExpressionUUID->"78a1887f-759c-42ee-ad86-\
+  3.708252545704547*^9, 3.708252598424301*^9}, {3.708256799435274*^9, 
+  3.708256848336609*^9}, {3.708257045130962*^9, 
+  3.708257045312114*^9}},ExpressionUUID->"78a1887f-759c-42ee-ad86-\
 603f72c4ca04"]
 }, Open  ]],
 
@@ -4640,23 +4647,10 @@ Cell["Code", "TemplateSubsection",
    3.549542327097245*^9},ExpressionUUID->"c54bc669-1d00-4e87-877b-\
 cfd746ce37fa"],
 
-Cell["Provide one of:", "TemplateComment",
- CellChangeTimes->{{3.70811356171093*^9, 
-  3.7081135645971746`*^9}},ExpressionUUID->"a672a6f1-f8fa-4628-83e3-\
-5438bd707f89"],
-
-Cell[CellGroupData[{
-
 Cell["https://github.com/strawstack/majesticwolf", "Item",
  CellChangeTimes->{{3.7080963065367527`*^9, 3.708096309577277*^9}, 
    3.7082155849949827`*^9},ExpressionUUID->"66883a1c-6bbf-428e-84bc-\
-a7c0ba375299"],
-
-Cell["Explicit code", "Item",
- CellChangeTimes->{{3.708096312466115*^9, 
-  3.7080963343962107`*^9}},ExpressionUUID->"7c9362c5-ee46-4875-bc37-\
-652189adc85e"]
-}, Open  ]]
+a7c0ba375299"]
 }, Open  ]],
 
 Cell["Written Content / Lesson Plans", "TemplateSubsection",
@@ -4675,18 +4669,20 @@ Cell["Conclusions in Detail", "TemplateSubsection",
 Cell["\<\
 Simple functional games can be designed which have a moderate entertainment \
 value. In order to preserve simplicity and maintain clear game objectives and \
-rules, it was found to be best to restrict players ability to directly enter \
-code and instead offer the player buttons and controls that let them use \
-their programming knowledge to employ strategy without directly writing code. \
-The difficulties in allowing players a large, or infinite, number of moves is \
-that many functions can take several different types of input and generate \
-several types of output, which makes it difficult to verify if what the \
-player entered is a valid expression or a legal move in the game.   \
+rules, it was found to be best to restrict players\[CloseCurlyQuote] ability \
+to directly enter code and instead offer the player buttons and controls that \
+let them use their programming knowledge to employ strategy without directly \
+writing code. The difficulties in allowing players a large, or infinite, \
+number of moves is that many functions can take several different types of \
+input and generate several types of output, which makes it difficult to \
+verify if what the player entered is a valid expression or a legal move in \
+the game.   \
 \>", "Text",
  CellChangeTimes->{{3.708215624743034*^9, 3.708215637815074*^9}, {
   3.7082156881208153`*^9, 3.7082158843215227`*^9}, {3.708215915010247*^9, 
-  3.708215944122614*^9}, {3.70825051836178*^9, 
-  3.708250550239049*^9}},ExpressionUUID->"65e305f5-21f1-4587-8ad1-\
+  3.708215944122614*^9}, {3.70825051836178*^9, 3.708250550239049*^9}, {
+  3.708257067857469*^9, 
+  3.708257069989889*^9}},ExpressionUUID->"65e305f5-21f1-4587-8ad1-\
 3e0aae3ce28f"]
 }, Open  ]],
 
@@ -4712,12 +4708,12 @@ Cell["Future Directions", "TemplateSubsection",
 
 Cell["\<\
 Write tools that simplify the validation of arbitrary player submitted code \
-in order facilitate the creation of games that allow players more fine \
-grained interaction with code.\
+in order facilitate the creation of games that allow players more \
+fine-grained interaction with code.\
 \>", "Text",
  CellChangeTimes->{{3.708215976850816*^9, 3.708216045736771*^9}, {
-  3.708250584850873*^9, 
-  3.708250674781026*^9}},ExpressionUUID->"30cbf080-913c-4a79-84f0-\
+  3.708250584850873*^9, 3.708250674781026*^9}, {3.708256751740285*^9, 
+  3.708256751926695*^9}},ExpressionUUID->"30cbf080-913c-4a79-84f0-\
 8a17c61a0e28"]
 }, Open  ]],
 
@@ -4733,12 +4729,6 @@ Cell[CellGroupData[{
 Cell["Keywords", "TemplateSubsection",
  CellChangeTimes->{{3.549624602331629*^9, 3.549624604729114*^9}},
  CellTags->"Keywords",ExpressionUUID->"0a9d4fd1-d336-4f32-b85d-12e6f9eed8ed"],
-
-Cell["Provide keywords as items", "TemplateComment",
- CellChangeTimes->{{3.70811356171093*^9, 3.7081135645971746`*^9}, {
-  3.7081136127408867`*^9, 
-  3.708113615106327*^9}},ExpressionUUID->"98efa464-d671-4dc2-97d9-\
-29e7a0668393"],
 
 Cell[CellGroupData[{
 
@@ -4775,7 +4765,7 @@ Cell[TextData[{
   FontSize->Medium]
 }], "LastModified",
  CellTags->
-  "LastModifiedDate",ExpressionUUID->"eb94ba8f-63c5-4fc5-86fc-caebb7d94aee"],
+  "LastModifiedDate",ExpressionUUID->"5774554c-63da-42cd-a177-8098bba7f0af"],
 
 Cell[BoxData[
  ButtonBox[
@@ -4806,7 +4796,7 @@ ed733929beeb"]
 }, Open  ]]
 },
 WindowSize->{852, 752},
-WindowMargins->{{20, Automatic}, {Automatic, 26}},
+WindowMargins->{{Automatic, 106}, {Automatic, 32}},
 FrontEndVersion->"11.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 16, \
 2017)",
 StyleDefinitions->Notebook[{
@@ -9890,15 +9880,15 @@ adobe.com/xap/1.0/> <tiff:ResolutionUnit>2</tiff:ResolutionUnit> \
                     InterpretationBox[
                     ButtonBox[
                     TooltipBox[
-                    GraphicsBox[{{{{{{{{{{{{{
+                    GraphicsBox[{{{{{{{{{{{{{{
                     GrayLevel[0], 
-                    RectangleBox[{0, 0}]}}}}}}}}}}}}, {{{{{{{{{{{{
+                    RectangleBox[{0, 0}]}}}}}}}}}}}}}, {{{{{{{{{{{{{
                     GrayLevel[0], 
-                    RectangleBox[{1, -1}]}}}}}}}}}}}}, {{{{{{{{{{{{
+                    RectangleBox[{1, -1}]}}}}}}}}}}}}}, {{{{{{{{{{{{{
                     RGBColor[
                     0.7143816281376364, 0.21776150148775464`, 
                     0.03341725795376516], 
-                    RectangleBox[{0, -1}, {2, 1}]}}}}}}}}}}}}}, AspectRatio -> 
+                    RectangleBox[{0, -1}, {2, 1}]}}}}}}}}}}}}}}, AspectRatio -> 
                     1, Frame -> True, FrameStyle -> 
                     RGBColor[
                     0.4762544187584243, 0.14517433432516977`, 
@@ -9954,14 +9944,14 @@ adobe.com/xap/1.0/> <tiff:ResolutionUnit>2</tiff:ResolutionUnit> \
                    InterpretationBox[
                     ButtonBox[
                     TooltipBox[
-                    GraphicsBox[{{{{{{{{{{{{{
+                    GraphicsBox[{{{{{{{{{{{{{{
                     GrayLevel[0], 
-                    RectangleBox[{0, 0}]}}}}}}}}}}}}, {{{{{{{{{{{{
+                    RectangleBox[{0, 0}]}}}}}}}}}}}}}, {{{{{{{{{{{{{
                     GrayLevel[0], 
-                    RectangleBox[{1, -1}]}}}}}}}}}}}}, {{{{{{{{{{{{
+                    RectangleBox[{1, -1}]}}}}}}}}}}}}}, {{{{{{{{{{{{{
                     RGBColor[0.7143816281376364, 0.21776150148775464`, 
                     0.03341725795376516], 
-                    RectangleBox[{0, -1}, {2, 1}]}}}}}}}}}}}}}, AspectRatio -> 
+                    RectangleBox[{0, -1}, {2, 1}]}}}}}}}}}}}}}}, AspectRatio -> 
                     1, Frame -> True, FrameStyle -> 
                     RGBColor[
                     0.4762544187584243, 0.14517433432516977`, 
@@ -10100,42 +10090,42 @@ CellTagsIndex->{
    ea56f0aff682",
    CellTags->"Affiliation"]},
  "DataSources"->{
-  Cell[276247, 4698, 257, 4, 
+  Cell[276569, 4694, 257, 4, 
   57, "TemplateSubsection", "ExpressionUUID" -> "595aec4a-a293-426a-
    b50c-4acce4123cb2",
    CellTags->"DataSources"]},
  "FutureDirections"->{
-  Cell[276529, 4706, 276, 4, 
+  Cell[276851, 4702, 276, 4, 
   57, "TemplateSubsection", "ExpressionUUID" -> "e5647c6a-
    cb6b-4235-8887-8cfbb24ef769",
    CellTags->"FutureDirections"]},
  "References"->{
-  Cell[277203, 4723, 313, 5, 
+  Cell[277571, 4719, 313, 5, 
   68, "TemplateSubsection", "ExpressionUUID" -> "f66f7ca2-dcb9-4c06-9d0a-
    f2cc48d9fd79",
    CellTags->"References"]},
  "Keywords"->{
-  Cell[277541, 4732, 182, 2, 
+  Cell[277909, 4728, 182, 2, 
   57, "TemplateSubsection", "ExpressionUUID" -> "0a9d4fd1-d336-4f32-
    b85d-12e6f9eed8ed",
    CellTags->"Keywords"]},
  "LastModifiedDate"->{
-  Cell[278811, 4770, 232, 7, 
-  28, "LastModified", "ExpressionUUID" -> "eb94ba8f-63c5-4fc5-86fc-
-   caebb7d94aee",
+  Cell[278946, 4760, 232, 7, 
+  28, "LastModified", "ExpressionUUID" -> "5774554c-63da-42cd-
+   a177-8098bba7f0af",
    CellTags->"LastModifiedDate"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Author", 591298, 10086},
- {"Mentor", 591451, 10091},
- {"Affiliation", 591609, 10096},
- {"DataSources", 591772, 10101},
- {"FutureDirections", 591947, 10106},
- {"References", 592121, 10111},
- {"Keywords", 592287, 10116},
- {"LastModifiedDate", 592459, 10121}
+ {"Author", 591446, 10076},
+ {"Mentor", 591599, 10081},
+ {"Affiliation", 591757, 10086},
+ {"DataSources", 591920, 10091},
+ {"FutureDirections", 592095, 10096},
+ {"References", 592269, 10101},
+ {"Keywords", 592435, 10106},
+ {"LastModifiedDate", 592607, 10111}
  }
 *)
 (*NotebookFileOutline
@@ -10165,92 +10155,84 @@ Cell[2989, 71, 130047, 2144, 259, "TemplateFigure", "ExpressionUUID" -> \
 Cell[CellGroupData[{
 Cell[133073, 2220, 308, 5, 68, "TemplateSection", "ExpressionUUID" -> \
 "7f28a721-268a-464e-9bc5-31f61fa28c7d"],
-Cell[133384, 2227, 785, 13, 30, "TemplateText", "ExpressionUUID" -> \
+Cell[133384, 2227, 912, 15, 30, "TemplateText", "ExpressionUUID" -> \
 "854ae70b-14eb-423f-a4a3-db7cbd22f54a"],
-Cell[134172, 2242, 1741, 26, 125, "TemplateText", "ExpressionUUID" -> \
+Cell[134299, 2244, 1741, 26, 125, "TemplateText", "ExpressionUUID" -> \
 "31932f51-a8da-4910-b7dd-e57591b56e9a"],
-Cell[135916, 2270, 1387, 21, 87, "TemplateText", "ExpressionUUID" -> \
+Cell[136043, 2272, 1568, 23, 106, "TemplateText", "ExpressionUUID" -> \
 "fc37c58e-b01c-44f1-8892-c017509d95ad"]
 }, Open  ]]
 }, Open  ]],
-Cell[137330, 2295, 6920, 145, 63, "TemplateSectionDivider", "ExpressionUUID" \
+Cell[137638, 2299, 6920, 145, 63, "TemplateSectionDivider", "ExpressionUUID" \
 -> "121daac6-ac48-4910-9f55-fd2749685279"],
 Cell[CellGroupData[{
-Cell[144275, 2444, 507, 16, 68, "TemplateSection", "ExpressionUUID" -> \
+Cell[144583, 2448, 507, 16, 68, "TemplateSection", "ExpressionUUID" -> \
 "2d847a34-66d2-4516-b974-ff32b660a5bf"],
-Cell[144785, 2462, 1220, 19, 144, "Text", "ExpressionUUID" -> \
+Cell[145093, 2466, 1265, 19, 144, "Text", "ExpressionUUID" -> \
 "0746cc05-9ff2-4dea-862b-2a8fdc8e7d89"],
-Cell[146008, 2483, 118610, 1955, 341, "Input", "ExpressionUUID" -> \
+Cell[146361, 2487, 118610, 1955, 341, "Input", "ExpressionUUID" -> \
 "dc4da26d-138a-4d3a-8340-5aedb3a70cb3"]
 }, Open  ]],
-Cell[264633, 4441, 7856, 162, 63, "TemplateSectionDivider", "ExpressionUUID" \
+Cell[264986, 4445, 7856, 162, 63, "TemplateSectionDivider", "ExpressionUUID" \
 -> "003f9a05-6bef-4291-b1a6-f10f8847b0c0"],
 Cell[CellGroupData[{
-Cell[272514, 4607, 186, 3, 68, "TemplateSection", "ExpressionUUID" -> \
+Cell[272867, 4611, 186, 3, 68, "TemplateSection", "ExpressionUUID" -> \
 "ba97f0a3-c165-451d-bf4c-74c0b4a4f36e"],
 Cell[CellGroupData[{
-Cell[272725, 4614, 270, 4, 68, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[273078, 4618, 270, 4, 68, "TemplateSubsection", "ExpressionUUID" -> \
 "a4e3d008-4eb0-4d8e-bed7-33623658821c"],
-Cell[272998, 4620, 690, 12, 106, "Text", "ExpressionUUID" -> \
+Cell[273351, 4624, 956, 15, 125, "Text", "ExpressionUUID" -> \
 "78a1887f-759c-42ee-ad86-603f72c4ca04"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[273725, 4637, 183, 3, 68, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[274344, 4644, 183, 3, 68, "TemplateSubsection", "ExpressionUUID" -> \
 "c54bc669-1d00-4e87-877b-cfd746ce37fa"],
-Cell[273911, 4642, 169, 3, 30, "TemplateComment", "ExpressionUUID" -> \
-"a672a6f1-f8fa-4628-83e3-5438bd707f89"],
-Cell[CellGroupData[{
-Cell[274105, 4649, 211, 3, 30, "Item", "ExpressionUUID" -> \
-"66883a1c-6bbf-428e-84bc-a7c0ba375299"],
-Cell[274319, 4654, 157, 3, 30, "Item", "ExpressionUUID" -> \
-"7c9362c5-ee46-4875-bc37-652189adc85e"]
-}, Open  ]]
+Cell[274530, 4649, 211, 3, 30, "Item", "ExpressionUUID" -> \
+"66883a1c-6bbf-428e-84bc-a7c0ba375299"]
 }, Open  ]],
-Cell[274503, 4661, 186, 3, 68, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[274756, 4655, 186, 3, 68, "TemplateSubsection", "ExpressionUUID" -> \
 "a55786c3-e7a6-4cf3-bb54-b05532239df1"],
 Cell[CellGroupData[{
-Cell[274714, 4668, 249, 4, 57, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[274967, 4662, 249, 4, 57, "TemplateSubsection", "ExpressionUUID" -> \
 "5a247b12-4033-40a4-960f-65d46bf0f9c2"],
-Cell[274966, 4674, 988, 15, 125, "Text", "ExpressionUUID" -> \
+Cell[275219, 4668, 1057, 17, 125, "Text", "ExpressionUUID" -> \
 "65e305f5-21f1-4587-8ad1-3e0aae3ce28f"]
 }, Open  ]],
-Cell[275969, 4692, 275, 4, 68, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[276291, 4688, 275, 4, 68, "TemplateSubsection", "ExpressionUUID" -> \
 "f27ae70e-91c7-4506-8835-21b281190700"],
-Cell[276247, 4698, 257, 4, 57, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[276569, 4694, 257, 4, 57, "TemplateSubsection", "ExpressionUUID" -> \
 "595aec4a-a293-426a-b50c-4acce4123cb2",
  CellTags->"DataSources"],
 Cell[CellGroupData[{
-Cell[276529, 4706, 276, 4, 57, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[276851, 4702, 276, 4, 57, "TemplateSubsection", "ExpressionUUID" -> \
 "e5647c6a-cb6b-4235-8887-8cfbb24ef769",
  CellTags->"FutureDirections"],
-Cell[276808, 4712, 380, 8, 49, "Text", "ExpressionUUID" -> \
+Cell[277130, 4708, 426, 8, 49, "Text", "ExpressionUUID" -> \
 "30cbf080-913c-4a79-84f0-8a17c61a0e28"]
 }, Open  ]],
-Cell[277203, 4723, 313, 5, 68, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[277571, 4719, 313, 5, 68, "TemplateSubsection", "ExpressionUUID" -> \
 "f66f7ca2-dcb9-4c06-9d0a-f2cc48d9fd79",
  CellTags->"References"],
 Cell[CellGroupData[{
-Cell[277541, 4732, 182, 2, 57, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[277909, 4728, 182, 2, 57, "TemplateSubsection", "ExpressionUUID" -> \
 "0a9d4fd1-d336-4f32-b85d-12e6f9eed8ed",
  CellTags->"Keywords"],
-Cell[277726, 4736, 230, 4, 30, "TemplateComment", "ExpressionUUID" -> \
-"98efa464-d671-4dc2-97d9-29e7a0668393"],
 Cell[CellGroupData[{
-Cell[277981, 4744, 247, 4, 30, "Item", "ExpressionUUID" -> \
+Cell[278116, 4734, 247, 4, 30, "Item", "ExpressionUUID" -> \
 "3b9a0db3-df49-4532-b956-8ec2c42dd8bf"],
-Cell[278231, 4750, 203, 4, 30, "Item", "ExpressionUUID" -> \
+Cell[278366, 4740, 203, 4, 30, "Item", "ExpressionUUID" -> \
 "acccdba7-4cc8-463f-9532-578badae9914"]
 }, Open  ]]
 }, Open  ]],
-Cell[278461, 4758, 160, 3, 68, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[278596, 4748, 160, 3, 68, "TemplateSubsection", "ExpressionUUID" -> \
 "7829dc32-1c2b-44a2-9c28-0b354f138b29"],
 Cell[CellGroupData[{
-Cell[278646, 4765, 162, 3, 57, "TemplateSubsection", "ExpressionUUID" -> \
+Cell[278781, 4755, 162, 3, 57, "TemplateSubsection", "ExpressionUUID" -> \
 "1cd568fb-8340-49f7-8b1e-208734b6bb99"],
-Cell[278811, 4770, 232, 7, 28, "LastModified", "ExpressionUUID" -> \
-"eb94ba8f-63c5-4fc5-86fc-caebb7d94aee",
+Cell[278946, 4760, 232, 7, 28, "LastModified", "ExpressionUUID" -> \
+"5774554c-63da-42cd-a177-8098bba7f0af",
  CellTags->"LastModifiedDate"],
-Cell[279046, 4779, 917, 24, 43, "Input", "ExpressionUUID" -> \
+Cell[279181, 4769, 917, 24, 43, "Input", "ExpressionUUID" -> \
 "387919cf-8311-4ba3-bacd-ed733929beeb"]
 }, Open  ]]
 }, Open  ]]
